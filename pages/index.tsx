@@ -5,7 +5,7 @@ import Header from '../components/Header'
 
 const Home: NextPage = () => {
   return (
-    <div className="">
+    <div className="h-screen overflow-y-scroll bg-gray-50 scrollbar-hide">
       <Head>
         <title>Instagram</title>
         <link rel="icon" href="/favicon.ico" />
