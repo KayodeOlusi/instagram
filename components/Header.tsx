@@ -8,8 +8,12 @@ import {
   MenuIcon,
 } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
+import { useSession } from 'next-auth/react'
 
 const Header: React.FC = () => {
+  const { data: session, status } = useSession()
+  console.log(session)
+
   return (
     <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-5 flex max-w-6xl  justify-between lg:mx-auto">
