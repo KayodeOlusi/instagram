@@ -28,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const SignIn: React.FC<Props> = ({ providers }) => {
   return (
     <>
-      Sign In
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           <button onClick={() => signIn(provider.id)}>
