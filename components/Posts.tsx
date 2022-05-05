@@ -18,14 +18,14 @@ const Posts: React.FC = () => {
       caption: 'CLICK THE LIKE BUTTON',
     },
     {
-      id: '123',
+      id: '345',
       username: 'sssangha',
       img: 'https://links.papareact.com/3ke',
       userImg: 'https://links.papareact.com/3ke',
       caption: 'CLICK THE LIKE BUTTON',
     },
     {
-      id: '123',
+      id: '678',
       username: 'sssangha',
       img: 'https://links.papareact.com/3ke',
       userImg: 'https://links.papareact.com/3ke',
