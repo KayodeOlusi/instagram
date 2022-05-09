@@ -3,13 +3,26 @@ import { modalState } from '../atoms/modalAtom'
 import { Dialog, Transition } from '@headlessui/react'
 import { CameraIcon } from '@heroicons/react/outline'
 import { ChangeEvent, Fragment, useRef, useState } from 'react'
+import { db, storage } from '../firebase'
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from 'firebase/firestore'
+import { useSession } from 'next-auth/react'
+import { ref, getDownloadURL, uploadString } from 'firebase/storage'
 
 const Modal: React.FC = () => {
+  const { data: session } = useSession()
   const [isOpen, setIsOpen] = useRecoilState(modalState)
   const filePickerRef = useRef<HTMLInputElement>(null)
   const [selectedFile, setSelectedFile] = useState(null)
-  const captionRef = useRef()
+  const [loading, setLoading] = useState<boolean>(false)
+  const captionRef = useRef() as React.MutableRefObject<HTMLInputElement>
 
+  // Select an Image from local file
   const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
 
@@ -22,6 +35,38 @@ const Modal: React.FC = () => {
       // @ts-ignore
       setSelectedFile(readerEvent.target?.result)
     }
+  }
+
+  // Upload image and post to firebase
+  const uploadPost = async () => {
+    if (loading) return
+    setLoading(true)
+
+    const docRef = await addDoc(collection(db, 'posts'), {
+      username: session?.user?.name,
+      caption: captionRef.current.value,
+      profileImage: session?.user?.image,
+      timestamp: serverTimestamp(),
+    })
+
+    console.log('New doc added to', docRef.id)
+
+    // To get the image reference
+    const imageRef = ref(storage, `posts/${docRef.id}/image`)
+
+    // Upload image to firebase storage
+    await uploadString(imageRef, selectedFile!, 'data_url').then(
+      async (snapshot) => {
+        const downloadURL = await getDownloadURL(imageRef)
+        await updateDoc(doc(db, 'posts', docRef.id), {
+          image: downloadURL,
+        })
+      }
+    )
+
+    setIsOpen(false)
+    setLoading(false)
+    setSelectedFile(null)
   }
 
   return (
@@ -117,12 +162,14 @@ const Modal: React.FC = () => {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
+                    onClick={uploadPost}
+                    disabled={!selectedFile}
                     className="inline-flex w-full justify-center rounded-md border border-transparent
                      bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700
                      focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300
                      hover:disabled:bg-gray-300 sm:text-sm"
                   >
-                    Upload Post
+                    {loading ? 'Uploading...' : 'Upload Post'}
                   </button>
                 </div>
               </div>
