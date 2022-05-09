@@ -41,9 +41,8 @@ const Suggestions: React.FC = () => {
 
   return (
     <div className="mt-4 ml-10">
-      <div className="text-small mb-5 flex justify-between">
+      <div className="text-small mb-5">
         <h3 className="text0sm font-bold text-gray-400">Suggestions for you</h3>
-        <button className="font-semibold text-gray-600">See all</button>
       </div>
 
       {suggestions?.map((profile) => (
@@ -63,7 +62,9 @@ const Suggestions: React.FC = () => {
               Works at {profile.company.name}
             </h3>
           </div>
-          <button className="text-sm font-bold text-blue-400">Follow</button>
+          <button className="ml-5 text-sm font-bold text-blue-400">
+            Follow
+          </button>
         </div>
       ))}
     </div>
