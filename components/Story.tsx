@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import StoryModal from './StoryModal'
 
 interface Props {
@@ -13,12 +13,13 @@ const Story: React.FC<Props> = ({ img, username }) => {
     <React.Fragment>
       {showModal && (
         <StoryModal
+          showModal={showModal}
           setShowModal={setShowModal}
           image={img}
           userName={username}
         />
       )}
-      <div>
+      <div onClick={() => setShowModal(true)}>
         <img
           className="object contain h-14 w-14 cursor-pointer
          rounded-full border-2 border-red-500 p-[1.5px]

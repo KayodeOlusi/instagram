@@ -48,10 +48,6 @@ const Stories: React.FC = () => {
       rounded-sm border border-gray-200 bg-white p-6
       scrollbar-thin scrollbar-thumb-black"
     >
-      {session && (
-        <Story img={session.user?.image!} username={session.user?.name!} />
-      )}
-
       {suggestions?.map((profile) => (
         <Story
           key={profile.id}

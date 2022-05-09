@@ -2,8 +2,6 @@ import Image from 'next/image'
 import {
   SearchIcon,
   PlusCircleIcon,
-  UserGroupIcon,
-  HeartIcon,
   PaperAirplaneIcon,
   MenuIcon,
 } from '@heroicons/react/outline'
@@ -19,7 +17,7 @@ const Header: React.FC = () => {
   const router = useRouter()
 
   return (
-    <div className="sticky top-0 z-50 border-b bg-white pb-2 pt-2 shadow-sm">
+    <div className="sticky top-0 z-50 border-b bg-white pb-4 pt-4 shadow-sm">
       <div className="mx-5 flex max-w-6xl  justify-between lg:mx-auto">
         {/**Icon */}
         <div
@@ -78,7 +76,7 @@ const Header: React.FC = () => {
               <img
                 src={session?.user?.image!}
                 alt=""
-                className="h-10 w-10 cursor-pointer rounded-full"
+                className="hidden h-10 w-10 cursor-pointer rounded-full md:block"
               />
             </>
           ) : (

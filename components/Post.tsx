@@ -135,8 +135,8 @@ const Post: React.FC<Props> = ({ id, userName, img, caption, userImage }) => {
               return (
                 <div key={id} className="mb-1 flex items-center space-x-2">
                   <img src={userImage} alt="" className="h-7 rounded-full" />
-                  <p className="flex-1 text-sm">
-                    <span className="font-bold">{username} </span>
+                  <p className="flex-1 text-xs">
+                    <span className="text-xs font-bold">{username} </span>
                     {comment}
                   </p>
 

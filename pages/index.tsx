@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import BottomNav from '../components/BottomNav'
 import Feed from '../components/Feed'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
       <Header />
       {/**Feed */}
       <Feed />
+      <BottomNav />
 
       <Modal />
     </div>
