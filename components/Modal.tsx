@@ -2,7 +2,13 @@ import { useRecoilState } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import { Dialog, Transition } from '@headlessui/react'
 import { CameraIcon } from '@heroicons/react/outline'
-import { ChangeEvent, Fragment, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  Fragment,
+  MutableRefObject,
+  useRef,
+  useState,
+} from 'react'
 import { db, storage } from '../firebase'
 import {
   addDoc,
@@ -20,7 +26,7 @@ const Modal: React.FC = () => {
   const filePickerRef = useRef<HTMLInputElement>(null)
   const [selectedFile, setSelectedFile] = useState(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const captionRef = useRef() as React.MutableRefObject<HTMLInputElement>
+  const captionRef = useRef() as MutableRefObject<HTMLInputElement>
 
   // Select an Image from local file
   const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +54,6 @@ const Modal: React.FC = () => {
       profileImage: session?.user?.image,
       timestamp: serverTimestamp(),
     })
-
-    console.log('New doc added to', docRef.id)
 
     // To get the image reference
     const imageRef = ref(storage, `posts/${docRef.id}/image`)

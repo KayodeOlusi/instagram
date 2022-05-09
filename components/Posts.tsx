@@ -1,50 +1,27 @@
+import { collection, DocumentData } from 'firebase/firestore'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { db } from '../firebase'
 import Post from './Post'
 
-interface APost {
-  id: any
-  username: string
-  img: string
-  userImg: string
-  caption: string
-}
-
 const Posts: React.FC = () => {
-  const posts: APost[] = [
-    {
-      id: '123',
-      username: 'sssangha',
-      img: 'https://links.papareact.com/3ke',
-      userImg: 'https://links.papareact.com/3ke',
-      caption: 'CLICK THE LIKE BUTTON',
-    },
-    {
-      id: '345',
-      username: 'sssangha',
-      img: 'https://links.papareact.com/3ke',
-      userImg: 'https://links.papareact.com/3ke',
-      caption: 'CLICK THE LIKE BUTTON',
-    },
-    {
-      id: '678',
-      username: 'sssangha',
-      img: 'https://links.papareact.com/3ke',
-      userImg: 'https://links.papareact.com/3ke',
-      caption: 'CLICK THE LIKE BUTTON',
-    },
-  ]
+  const [posts] = useCollection<DocumentData>(collection(db, 'posts'))
 
   return (
     <div>
-      {posts?.map((post) => (
-        <Post
-          id={post.id}
-          key={post.id}
-          userName={post.username}
-          userImage={post.userImg}
-          img={post.img}
-          caption={post.caption}
-        />
-      ))}
+      {posts?.docs.map((post) => {
+        const { caption, image, profileImage, username } = post.data()
+
+        return (
+          <Post
+            id={post.id}
+            key={post.id}
+            userName={username}
+            userImage={profileImage}
+            img={image}
+            caption={caption}
+          />
+        )
+      })}
     </div>
   )
 }
