@@ -10,7 +10,7 @@ const Home: NextPage = () => {
     <div className="h-screen overflow-y-scroll bg-gray-50 scrollbar-hide">
       <Head>
         <title>Instagram</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://links.papareact.com/jjm" />
       </Head>
 
       {/**Header */}
