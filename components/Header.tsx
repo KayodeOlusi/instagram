@@ -16,8 +16,6 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useRecoilState(modalState)
   const router = useRouter()
 
-  console.log(session)
-
   return (
     <div className="sticky top-0 z-50 border-b bg-white pb-4 pt-4 shadow-sm">
       <div className="mx-5 flex max-w-6xl  justify-between lg:mx-auto">
