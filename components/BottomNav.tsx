@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@heroicons/react/outline'
-import { HomeIcon, HeartIcon } from '@heroicons/react/solid'
+import { HomeIcon, HeartIcon, CameraIcon } from '@heroicons/react/solid'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
@@ -18,11 +18,15 @@ const BottomNav: React.FC = () => {
         className="bottomNavBtn"
       />
       <HeartIcon className="bottomNavBtn" />
-      <img
-        src={session?.user?.image!}
-        alt=""
-        className="h-8 w-8 cursor-pointer rounded-full md:hidden"
-      />
+      {session ? (
+        <img
+          src={session?.user?.image!}
+          alt=""
+          className="h-8 w-8 cursor-pointer rounded-full md:hidden"
+        />
+      ) : (
+        <CameraIcon className="bottomNavBtn" />
+      )}
     </div>
   )
 }
