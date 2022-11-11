@@ -1,11 +1,11 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 
 interface Props {
-  image: string
-  userName: string
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  image: string;
+  userName: string;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const StoryModal: React.FC<Props> = ({
